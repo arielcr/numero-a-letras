@@ -1,0 +1,22 @@
+{
+  "name": "arielcr/numero-a-letras",
+  "description": "Convierte un número a su valor correspondiente en letras.",
+  "keywords": ["convertir", "numero", "letras"],
+  "homepage": "https://github.com/arielcr/numero-a-letras",
+  "license" : "MIT",
+  "authors" : [
+    {
+      "name": "Ariel Orozco",
+      "email": "bassplayer85@gmail.com",
+      "homepage": "http://arielorozco.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.4"
+  },
+  "autoload": {
+    "psr-0": {
+      "NumeroALetras": "src/"
+    }
+  }
+}

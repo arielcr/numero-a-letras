@@ -15,6 +15,12 @@ Agrega `arielcr/numero-a-letras` a tu archivo composer.json.
 ## Uso
 
         $letras = NumeroALetras::convertir(12345);
+        
+Si deseas convertir un número con decimales y mostrar la moneda:
+
+        $letras = NumeroALetras::convertir(12345.67, 'colones', 'centimos');
+        
+Lo cual te devuelve: *DOCE MIL TRESCIENTOS CUARENTA Y CINCO COLONES CON SESENTA Y SIETE CENTIMOS*
 
 ## Créditos
 

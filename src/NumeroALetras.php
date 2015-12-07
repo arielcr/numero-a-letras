@@ -61,12 +61,25 @@ class NumeroALetras
         'NOVECIENTOS '
     ];
 
-    public static function convertir($number)
+    public static function convertir($number, $moneda = '', $centimos = '')
     {
         $converted = '';
+        $decimales = '';
 
         if (($number < 0) || ($number > 999999999)) {
             return 'No es posible convertir el numero a letras';
+        }
+
+        $div_decimales = explode('.',$number);
+
+        if(count($div_decimales) > 1){
+            $number = $div_decimales[0];
+            $decNumberStr = (string) $div_decimales[1];
+            if(strlen($decNumberStr) == 2){
+                $decNumberStrFill = str_pad($decNumberStr, 9, '0', STR_PAD_LEFT);
+                $decCientos = substr($decNumberStrFill, 6);
+                $decimales = self::convertGroup($decCientos);
+            }
         }
 
         $numberStr = (string) $number;
@@ -99,7 +112,13 @@ class NumeroALetras
             }
         }
 
-        return $converted;
+        if(empty($decimales)){
+            $valor_convertido = $converted . strtoupper($moneda);
+        } else {
+            $valor_convertido = $converted . strtoupper($moneda) . ' CON ' . $decimales . ' ' . strtoupper($centimos);
+        }
+
+        return $valor_convertido;
     }
 
     private static function convertGroup($n)

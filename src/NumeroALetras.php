@@ -61,7 +61,7 @@ class NumeroALetras
         'NOVECIENTOS '
     ];
 
-    public static function convertir($number, $moneda = '', $centimos = '')
+    public static function convertir($number, $moneda = '', $centimos = '', $forzarCentimos = false)
     {
         $converted = '';
         $decimales = '';
@@ -80,6 +80,9 @@ class NumeroALetras
                 $decCientos = substr($decNumberStrFill, 6);
                 $decimales = self::convertGroup($decCientos);
             }
+        }
+        else if (count($div_decimales) == 1 && $forzarCentimos){
+            $decimales = 'CERO ';
         }
 
         $numberStr = (string) $number;

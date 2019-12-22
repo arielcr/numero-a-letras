@@ -9,6 +9,7 @@
  *
  * @author AxiaCore S.A.S
  *
+ * Modify GKhelio
  */
 
 class NumeroALetras
@@ -70,15 +71,21 @@ class NumeroALetras
             return 'No es posible convertir el numero a letras';
         }
 
+
+
         $div_decimales = explode('.',$number);
 
         if(count($div_decimales) > 1){
             $number = $div_decimales[0];
             $decNumberStr = (string) $div_decimales[1];
-            if(strlen($decNumberStr) == 2){
+            if(strlen($decNumberStr) >= 2){
                 $decNumberStrFill = str_pad($decNumberStr, 9, '0', STR_PAD_LEFT);
                 $decCientos = substr($decNumberStrFill, 6);
                 $decimales = self::convertGroup($decCientos);
+            }
+            else
+            {             
+                $decimales = self::convertEntero($decNumberStr);
             }
         }
         else if (count($div_decimales) == 1 && $forzarCentimos){
@@ -118,7 +125,7 @@ class NumeroALetras
         if(empty($decimales)){
             $valor_convertido = $converted . strtoupper($moneda);
         } else {
-            $valor_convertido = $converted . strtoupper($moneda) . ' CON ' . $decimales . ' ' . strtoupper($centimos);
+            $valor_convertido = $converted . strtoupper($moneda) . ' CON ' . $decimales . strtoupper($centimos);
         }
 
         return $valor_convertido;
@@ -139,7 +146,7 @@ class NumeroALetras
         if ($k <= 20) {
             $output .= self::$UNIDADES[$k];
         } else {
-            if(($k > 30) && ($n[2] !== '0')) {
+            if(($k >= 30) && ($n[2] !== '0')) {
                 $output .= sprintf('%sY %s', self::$DECENAS[intval($n[1]) - 2], self::$UNIDADES[intval($n[2])]);
             } else {
                 $output .= sprintf('%s%s', self::$DECENAS[intval($n[1]) - 2], self::$UNIDADES[intval($n[2])]);
@@ -148,4 +155,19 @@ class NumeroALetras
 
         return $output;
     }
+
+    private static function convertEntero($n)
+    {
+        if ($n <=2)
+        {
+            $output = self::$UNIDADES[$n];
+        }
+        else
+        {
+            $output = self::$DECENAS[$n - 2];
+        }
+
+        return $output;
+    }
+    
 }

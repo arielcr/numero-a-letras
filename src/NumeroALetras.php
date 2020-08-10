@@ -38,7 +38,7 @@ class NumeroALetras
     ];
 
     private static $DECENAS = [
-        'VENTI',
+        'VEINTI',
         'TREINTA ',
         'CUARENTA ',
         'CINCUENTA ',
